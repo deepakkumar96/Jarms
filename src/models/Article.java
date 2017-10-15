@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import db.GenericService;
+import java.util.Optional;
 import lombok.Data;
+import util.ModelUtil;
 import util.ThrowingFunction;
 
 /**
@@ -59,6 +61,15 @@ public @Data class Article implements Document{
     }    
     
     
+    public Optional<User> getUser(){
+        return ModelUtil.getUser(articleUser);
+    }
+    
+    public Optional<Category> getCategory(){
+        return ModelUtil.getCategory(articleCategory);
+    }
+    
+    
     @Override
     public String toString(){
         return this.articleTitle;
@@ -66,5 +77,20 @@ public @Data class Article implements Document{
 
     public static void main(String[] args){
         System.out.print(Article.service.all());
+    }
+
+    @Override
+    public String getTitle() {
+        return articleTitle;
+    }
+
+    @Override
+    public String getContent() {
+        return articleContent;
+    }
+
+    @Override
+    public String getSummary() {
+        return articleSummary;
     }
 }

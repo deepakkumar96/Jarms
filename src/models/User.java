@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 import javax.swing.JOptionPane;
 import lombok.Data;
+import static models.UserRole.service;
+import util.ModelUtil;
 
 /**
  *
@@ -65,11 +67,16 @@ public @Data class User {
     
     
     public Optional<Address> getAddress(){
-        Optional<Address> address = Address.service.get(addressId+"");
-        if(address.isPresent()) return address;
-        else return Optional.empty();
+        return ModelUtil.getAddress(addressId);
     }
     
+    public Optional<UserType> getUserType(){
+        return ModelUtil.getUserType(userTypeId);
+    }
+    
+    public Optional<SecurityQuestion> getSecurityQuestion(){
+        return ModelUtil.getSecurityQuestion(securityQueId);
+    }
     /*
         Creates a User object from ResultSet object
     */

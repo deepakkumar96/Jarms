@@ -1,6 +1,7 @@
 
 package models;
 
+import util.DocumentType;
 import anotations.ID;
 import anotations.Table;
 import db.GenericService;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import lombok.Data;
+import util.ModelUtil;
 
 /**
  *
@@ -43,13 +45,11 @@ public @Data class Bookmark {
         It returns instance of Document based on workId
     */
     public Optional<? extends Document> getDocument(){
-        Optional<? extends Document> document = null;
-        switch(DocumentType.getType(workId)){
-            case ARTICLE:
-                document = Article.service.get(workId+"");
-        }
-        if(document.isPresent()) return document;
-        else return Optional.empty();
+        return ModelUtil.getDocument(belongTo, workId);
+    }
+    
+    public Optional<User> getUser(){
+        return ModelUtil.getUser(userId);
     }
     
     public static Bookmark createBookmarkFromResultSet(ResultSet rs) throws SQLException{

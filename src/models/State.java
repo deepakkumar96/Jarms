@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import lombok.Data;
+import util.ModelUtil;
 
 /**
  *
@@ -38,10 +39,7 @@ public @Data class State {
     }
     
     public Optional<Country> getCountry(){
-        Optional<Country> country = Country.service.get(countryId+"");
-        if(country.isPresent())
-            return country;
-        return Optional.empty();
+        return ModelUtil.getCountry(countryId);
     }
     
     public static State createStateFromResultSet(ResultSet rs) throws SQLException{
@@ -53,7 +51,9 @@ public @Data class State {
         
         System.out.println(st);
         
-        st.getCountry().ifPresent(System.out::println);
+        Country c = st.getCountry().get();  
+        
+        //st.getCountry().ifPresent(System.out::println);
         
     }
 }

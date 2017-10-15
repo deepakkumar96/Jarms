@@ -17,8 +17,7 @@ import lombok.*;
  */
 
 @Table(tableName = "tag")
-@AllArgsConstructor()
-public @Data(staticConstructor = "of") class Tag {
+public @Data class Tag {
     @ID(dbField = "tag_id", fieldType = int.class)
     private int id;
     private String name;
@@ -26,34 +25,23 @@ public @Data(staticConstructor = "of") class Tag {
     //service
     public static GenericService<Tag> service = new GenericService<>(Tag.class, Tag::createTagFromResultSet);
     
-    public static Tag createTagFromResultSet(ResultSet rs) throws SQLException{
-            return null;//new Tag(rs.getInt(1),  rs.getString(2)); 
-    }
-    
-    
-    /*
-    
-
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Tag(String name){
         this.name = name;
     }
-    */
+    
+    public Tag(int id, String name){
+        this(name);
+        this.id = id;
+    }
+    
+    public static Tag createTagFromResultSet(ResultSet rs) throws SQLException{
+            return new Tag(rs.getInt(1),  rs.getString(2)); 
+    }
+    
+    
     public static void main(String...args){
         System.out.println("Java");
-        Tag t = new Tag(10, "Java");
+        Tag.service.all();
         
     }
 }

@@ -10,4 +10,7 @@ package models;
  * @author deepak
  */
 public interface Document {
+    public String getTitle();
+    public String getContent();
+    public String getSummary();
 }

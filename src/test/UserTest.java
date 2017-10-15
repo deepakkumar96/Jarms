@@ -5,9 +5,7 @@
  */
 package test;
 
-import db.Column;
 import db.ModelServiceFactory;
-import db.Row;
 import models.Article;
 import models.User;
 import db.SqlTable;
@@ -21,7 +19,7 @@ import models.Bookmark;
 public class UserTest {
     
     public static void main(String[] args) {
-        User.service.all().forEach(System.out::println);
+        User.service.all().forEach(System.out::println);  // fetch all users
         
         Optional<User> user = User.service.get(1+""); // fetching user with id = 1
         
@@ -31,6 +29,10 @@ public class UserTest {
             //checking user's address
             usr.getAddress().ifPresent(addr ->{
                 System.out.println(usr.getFirstName() + "'s Address :> " + addr);
+            });
+            
+            usr.getUserType().ifPresent(type ->{
+                System.out.println(usr.getFirstName() + "'s Type :> " + type);
             });
         });
         

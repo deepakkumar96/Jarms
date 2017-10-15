@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import util.ModelUtil;
 
 /**
  *
@@ -43,11 +44,7 @@ public @Data class Address{
     }
     
     public Optional<City> getCity(){
-        Optional<City> st = City.service.get(city+"");
-        if(st.isPresent())
-            return st;
-        else
-            return Optional.empty();
+        return ModelUtil.getCity(city);
     }
     
     public static Address createAddressFromResultSet(ResultSet rs) throws SQLException{

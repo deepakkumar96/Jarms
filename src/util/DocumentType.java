@@ -3,24 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package util;
 
 /**
  *
  * @author deepak
  */
 public enum DocumentType {
-    ARTICLE, JOURNAL, RESEARCH_PAPER;
+    ARTICLE, JOURNAL, RESEARCH_PAPER, UNKNOWN;
     
-    static DocumentType getType(int workId){
+    public static DocumentType getType(int workId){
         switch (workId) {
             case 1:
                 return ARTICLE;
             case 2:
                 return JOURNAL;
-            default:
+            case 3:
                 return RESEARCH_PAPER;
+            default:
+                return UNKNOWN;
         }
-            
     }
 }

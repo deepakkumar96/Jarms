@@ -15,8 +15,12 @@ import db.SqlTable;
 public class RawQueryTest {
     
     public static void main(String...args){
-        
-        SqlTable db = ModelServiceFactory.fetchRawQuery("select city_name from city;"); // RAW query without model
+        /*
+            ModelServiceFactory.fetchRawQuery is used for executing those querys
+            whose result is not aModel class such as a join query which can't
+            be represented by a single model.
+        */
+        SqlTable db = ModelServiceFactory.fetchRawQuery("select state_name,city_name from city, state;"); // RAW query without model
         
         System.out.println(db);
         

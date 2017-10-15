@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 import lombok.Data;
+import util.ModelUtil;
 
 /**
  *
@@ -37,11 +38,7 @@ public @Data class City {
     }
     
     public Optional<State> getState(){
-        Optional<State> st = State.service.get(state+"");
-        if(st.isPresent())
-            return st;
-        else
-            return Optional.empty();
+        return ModelUtil.getState(state);
     }
     
     public static City createCityFromResultSet(ResultSet rs) throws SQLException{
